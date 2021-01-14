@@ -30,6 +30,7 @@
     inputValue = '';
     inputRef.blur();
     inputRef.value = '';
+    btnRef.disabled = true;
   }
 </script>
 

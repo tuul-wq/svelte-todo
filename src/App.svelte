@@ -92,4 +92,9 @@
 		margin-left: 50px;
 		margin-right: 50px;
 	}
+	@media screen and (max-width: 600px) {
+		.inner {
+			margin: 0;
+		}
+	}
 </style>

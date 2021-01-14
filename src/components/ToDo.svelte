@@ -1,10 +1,12 @@
 <div class="todo-item">
   {#if isEditState}
-    <input class="edit" type="text" bind:value={newTodoValue} bind:this={inputRef}>
-    <div class="btn-group">
-      <button class="btn btn__outlined" type="button" on:click={cancelEdit}>Cancel</button>
-      <button class="btn btn__outlined" type="button" on:click={saveEdit}>Save</button>
-    </div>
+    <form on:submit|preventDefault={saveEdit} on:keydown={cancelOnEsc}>
+      <input class="edit" type="text" bind:value={newTodoValue} bind:this={inputRef}>
+      <div class="btn-group">
+        <button class="btn btn__outlined" type="button" on:click={cancelEdit}>Cancel</button>
+        <button class="btn btn__outlined" type="submit" disabled={!newTodoValue}>Save</button>
+      </div>
+    </form>
   {:else}
     <label class="checkbox-group">
       <input
@@ -54,6 +56,10 @@
 
   function cancelEdit() {
     isEditState = false;
+  }
+
+  function cancelOnEsc(event) {
+    if (event.key === 'Escape') cancelEdit();
   }
 
   function saveEdit() {
